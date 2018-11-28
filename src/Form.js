@@ -27,20 +27,23 @@ class Form extends Component {
   render() {
     const { number } = this.state;
     return (
-      <form id="form">
-      <input
-        type="text"
-        name="entry"
-        value={number}
-        onChange={this.handleChange}
-      />
-      <input className="btn--submit"
-        form="form"
-        type="button"
-        value="Submit"
-        onClick={this.submitForm}
-      />
-      </form>
+      <>
+        <form id="form" className="form">
+        <h2 className="heading">Initialize Array</h2>
+        <input
+          type="text"
+          name="entry"
+          value={number}
+          onChange={this.handleChange}
+        />
+        <input className="btn--submit"
+          form="form"
+          type="button"
+          value="Submit"
+          onClick={this.submitForm}
+        />
+        </form>
+      </>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Form from './Form';
-import Cards from './Cards';
+import Card from './Cards';
 import './index.css';
 
 class App extends Component {
@@ -8,21 +8,41 @@ class App extends Component {
     super(props);
     this.state = {
       array: [],
+
+      classNameArray: [
+        "card card--init",
+        "card card--forEach",
+        "card card--map",
+        "card card--filter",
+        "card card--some",
+      ],
     };
   }
   handleSubmit = (entry) => {
     if (entry === '') return;
     this.setState({array: [...this.state.array, entry]});
   }
+
+  renderCard = (i) => {
+    return (
+      <Card
+        index={i}
+        className={this.state.classNameArray[i]}
+        arrayData={this.state.array}
+      />
+    );
+  }
+
   render() {
     return (
       <main>
         <Form
           handleSubmit={this.handleSubmit}
         />
-        <Cards
-          arrayData={this.state.array}
-        />
+        {this.renderCard(0)}
+        {this.renderCard(1)}
+        {this.renderCard(2)}
+
       </main>
     );
   }

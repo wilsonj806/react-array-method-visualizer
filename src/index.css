@@ -1,3 +1,17 @@
+main{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.btn{
+  background-color: #007bff;
+  color: white;
+  border: 0px solid transparent;
+  border-radius: 3px;
+  padding: 5px 5px;
+  margin: 0px 5px;
+}
 
 input[type="button"]{
   background-color: #007bff;
@@ -7,6 +21,24 @@ input[type="button"]{
   padding: 5px 5px;
   margin: 0px 5px;
 }
-form{
-  width:25%;
+
+.form{
+  width:33%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.card{
+  color:green;
+  width: 33%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.card--init{
+  background-color: pink;
 }
