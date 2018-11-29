@@ -1,12 +1,98 @@
+main{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.btn{
+  margin: 0px 5px;
+  padding: 5px 5px;
+  border-radius: 3px;
+  border: 0px solid transparent;
+  color: white;
+}
+
+.btn--std{
+  background-color: #007bff;
+}
+
+.btn--reset{
+  width: 51.50px;
+  background-color: #dc3545;
+}
 
 input[type="button"]{
+  margin: 0px 5px;
+  padding: 5px 5px;
+  border-radius: 3px;
+  border: 0px solid transparent;
   background-color: #007bff;
   color: white;
-  border: 0px solid transparent;
-  border-radius: 3px;
-  padding: 5px 5px;
-  margin: 0px 5px;
 }
-form{
-  width:25%;
+
+.form{
+  margin: 0 20px;
+  width:90%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.card{
+  padding-bottom: 15px;
+  width: 90%;
+  border-radius: 5px;
+  border: 1px solid #f7f7f7;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__heading{
+  margin-top: 0;
+  padding: 10px 0;
+  width:100%;
+  height: auto;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #e8e8e8;
+  text-align: center;
+}
+
+.card__content{
+  height: 8rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 1024px) {
+  main{
+    flex-flow: row wrap;
+  }
+  .form{
+    margin: 10px;
+    width: 30%;
+  }
+  .card{
+    margin: 10px;
+    width: 30%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .form{
+    width: 22%;
+  }
+  .card{
+    margin: 20px;
+    width: 22%;
+  }
 }
