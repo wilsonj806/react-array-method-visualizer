@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
     this.state = {
       array: [],
-
+      resetNow: false,
+      isClicked: false,
       classNameArray: [
         "card card--init",
         "card card--forEach",
@@ -18,17 +19,32 @@ class App extends Component {
       ],
     };
   }
+
   handleSubmit = (entry) => {
     if (entry === '') return;
     this.setState({array: [...this.state.array, entry]});
   }
 
+  handleBtn = () => {
+    this.setState({isClicked: !this.state.isClicked});
+  }
+
+  resetArrays = () => {
+    this.setState({
+      array: [],
+    });
+  }
+
   renderCard = (i) => {
+    const state = this.state;
     return (
       <Card
-        index={i}
-        className={this.state.classNameArray[i]}
-        arrayData={this.state.array}
+        keyVal={i}
+        className={state.classNameArray[i]}
+        arrayData={state.array}
+        resetState={state.resetNow}
+        onClick={() => this.handleBtn()}
+        isClicked={state.isClicked}
       />
     );
   }
@@ -38,6 +54,7 @@ class App extends Component {
       <main>
         <Form
           handleSubmit={this.handleSubmit}
+          resetArrays={this.resetArrays}
         />
         {this.renderCard(0)}
         {this.renderCard(1)}
