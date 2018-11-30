@@ -25,14 +25,9 @@ class App extends Component {
     this.setState({array: [...this.state.array, entry]});
   }
 
-  handleBtn = () => {
-    this.setState({isClicked: !this.state.isClicked});
-  }
-
   resetArrays = () => {
-    this.setState({
-      array: [],
-    });
+    console.log(this);
+    this.setState({array: []});
   }
 
   renderCard = (i) => {
@@ -43,7 +38,7 @@ class App extends Component {
         className={state.classNameArray[i]}
         arrayData={state.array}
         resetState={state.resetNow}
-        onClick={() => this.handleBtn()}
+        onResetClick={() => this.resetArray()}
         isClicked={state.isClicked}
       />
     );

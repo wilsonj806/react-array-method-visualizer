@@ -5,6 +5,7 @@ class Card extends Component {
     super(props);
     this.initialState = {
       arrayInstance: [],
+      isClicked: false,
     }
     this.state = this.initialState;
   }
@@ -36,14 +37,19 @@ class Card extends Component {
     }
   }
 
-  setInstance = () => {
-    this.setState({arrayInstance: [...this.props.arrayData]});
-  }
+  handleBtn = () => {
+    if (this.state.arrayInstance.length === 0) {
+      this.setState({
+        arrayInstance: this.props.arrayData,
+        isClicked: !this.state.isClicked,
+      });
+    }
 
-  resetInstance = () => {
-    this.setState({arrayInstance: []});
   }
-
+  resetClickState = (e) => {
+    console.log(e);
+    this.setState({isClicked: false});
+  }
   renderArray = () => {
     if ((this.props.arrayData.length < 1) && (this.props.keyVal === 0)){
       return `Please submit values`;
@@ -57,9 +63,13 @@ class Card extends Component {
   }
 
   processArray = () => {
-    const strArr = this.props.arrayData.toString();
+    if (this.props.keyVal === 0) return;
+    const strArr = this.state.arrayInstance.toString();
     return (
-      <p className="card__text">
+      <p
+      className="card__text"
+      onLoad={(e) => this.resetClickState(e)}
+      >
         [{strArr}]
       </p>
     )
@@ -75,15 +85,23 @@ class Card extends Component {
     }
     if (this.props.keyVal !== 0) {
       primBtn =
-        <button
+        <>
+          <button
+            type="button"
+            className="btn btn--std"
+            onClick={(e) => this.handleBtn(e)}
+          >
+            Begin Computation
+          </button>
+          <button
           type="button"
-          className="btn btn--std"
-          onClick={() => this.props.onClick()}
-        >
-          Begin Computation
-        </button>
+          className="btn btn--reset"
+          onClick={() => this.props.onResetClick()}
+          >
+            Reset
+          </button>
+        </>
     }
-
     return (
       <div className={this.props.className}
         key={keyVal}
