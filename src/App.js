@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
 import Form from './Form';
 import Card from './Cards';
+import Container from './Container';
 import './index.css';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
+    this.initialState = {
+      toRender: {
+        map: false,
+        filter: false,
+        forEach: false,
+        some: false,
+        sort: false,
+        find: false,
+      },
       array: [],
       resetNow: false,
       isClicked: false,
       classNameArray: [
         "card card--init",
-        "card card--forEach",
         "card card--map",
         "card card--filter",
+        "card card--forEach",
         "card card--some",
       ],
     };
+    this.state = this.initialState;
   }
 
   handleSubmit = (entry) => {
@@ -25,13 +35,34 @@ class App extends Component {
     this.setState({array: [...this.state.array, entry]});
   }
 
-  handleBtn = () => {
-    this.setState({isClicked: !this.state.isClicked});
+  handleCardAdd = (keyVal) => {
+    switch(keyVal) {
+      case 1:
+        this.setState({
+          toRender: {
+            ...this.state.toRender,
+            map: !this.state.toRender.map,
+          },
+        });
+        break;
+      case 2:
+        this.setState({
+          toRender: {
+            ...this.state.toRender,
+            filter: !this.state.toRender.filter,
+          },
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   resetArrays = () => {
+    console.log(this);
     this.setState({
       array: [],
+      toRender: {...this.initialState.toRender}
     });
   }
 
@@ -43,8 +74,7 @@ class App extends Component {
         className={state.classNameArray[i]}
         arrayData={state.array}
         resetState={state.resetNow}
-        onClick={() => this.handleBtn()}
-        isClicked={state.isClicked}
+        onResetClick={() => this.resetArray()}
       />
     );
   }
@@ -54,12 +84,15 @@ class App extends Component {
       <main>
         <Form
           handleSubmit={this.handleSubmit}
+          handleCardAddFn={this.handleCardAdd}
           resetArrays={this.resetArrays}
+          renderCardFn={this.renderCard}
         />
-        {this.renderCard(0)}
-        {this.renderCard(1)}
-        {this.renderCard(2)}
-
+        <Container
+        className="ctr--cards"
+        renderCardFn={this.renderCard}
+        renderState={this.state.toRender}
+        />
       </main>
     );
   }

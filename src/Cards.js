@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-
 class Card extends Component {
   constructor(props){
     super(props);
     this.initialState = {
       arrayInstance: [],
+      isclicked: false,
+      isRendering: false,
     }
     this.state = this.initialState;
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // reset if button is clicked
+    if (this.state.isclicked !== false) {
+      this.setState({isclicked: false});
+      return;
+    }
+  }
+  // move this to App.js
   renderHeading = i => {
     switch (i) {
       case 0:
@@ -17,52 +26,58 @@ class Card extends Component {
         );
       case 1:
         return (
-          'Array.prototype.forEach()'
+          'Array.prototype.map( )'
         );
       case 2:
         return (
-          'Array.prototype.map()'
+          'Array.prototype.filter( )'
         );
       case 3:
         return (
-          'Array.prototype.filter()'
+          'Array.prototype.forEach( )'
         );
       case 4:
         return (
-          'Array.prototype.some()'
+          'Array.prototype.some( )'
         );
       default:
       break;
     }
   }
 
-  setInstance = () => {
-    this.setState({arrayInstance: [...this.props.arrayData]});
-  }
+  handleBtn = () => {
+    if (this.state.arrayInstance.length === 0) {
+      this.setState({
+        arrayInstance: this.props.arrayData,
+        isclicked: !this.state.isclicked,
+        isRendering: !this.state.isRendering,
+      });
+    }
 
-  resetInstance = () => {
-    this.setState({arrayInstance: []});
   }
-
   renderArray = () => {
     if ((this.props.arrayData.length < 1) && (this.props.keyVal === 0)){
       return `Please submit values`;
     }
-    if (this.props.keyVal === 0) {
-      return `[${this.props.arrayData}]`;
-    }
-    if (this.props.arrayData.length > 0) {
-      return `[${this.props.arrayData}]`;
+    if ((this.props.keyVal === 0) || (this.props.arrayData.length > 0)) {
+      return `[ ${this.props.arrayData} ]`;
     }
   }
 
   processArray = () => {
-    const strArr = this.props.arrayData.toString();
+    if (this.props.keyVal === 0) return;
+    let strArr = `[ ${this.state.arrayInstance.toString()} ]`
     return (
-      <p className="card__text">
-        [{strArr}]
+      <p
+      className="card__text"
+      >
+        {strArr}
       </p>
     )
+  }
+
+  resetInstanceArray = () => {
+    this.setState({arrayInstance: []});
   }
 
   render() {
@@ -70,20 +85,28 @@ class Card extends Component {
     let result;
     let primBtn;
 
-    if (this.state.isClicked === true) {
+    if ((this.state.isclicked === true) || (this.state.isRendering === true)) {
       result = this.processArray(this.props.keyVal);
     }
     if (this.props.keyVal !== 0) {
       primBtn =
-        <button
+        <>
+          <button
+            type="button"
+            className="btn btn--std"
+            onClick={() => this.handleBtn()}
+          >
+            Begin Computation
+          </button>
+          <button
           type="button"
-          className="btn btn--std"
-          onClick={() => this.props.onClick()}
-        >
-          Begin Computation
-        </button>
+          className="btn btn--reset"
+          onClick={() => this.resetInstanceArray()}
+          >
+            Reset
+          </button>
+        </>
     }
-
     return (
       <div className={this.props.className}
         key={keyVal}
@@ -94,7 +117,9 @@ class Card extends Component {
             {this.renderArray()}
           </p>
           {result}
-          {primBtn}
+          <div className="ctr--btn">
+            {primBtn}
+          </div>
         </div>
       </div>
     );
