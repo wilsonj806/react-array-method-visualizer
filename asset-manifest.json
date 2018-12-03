@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.07b460cf.chunk.css",
-  "main.js": "/static/js/main.cdd636a5.chunk.js",
-  "main.js.map": "/static/js/main.cdd636a5.chunk.js.map",
-  "static/js/1.0e0224ce.chunk.js": "/static/js/1.0e0224ce.chunk.js",
-  "static/js/1.0e0224ce.chunk.js.map": "/static/js/1.0e0224ce.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.07b460cf.chunk.css.map": "/static/css/main.07b460cf.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.c53fee1f0713a9694d8dd79dff6d15a6.js": "/precache-manifest.c53fee1f0713a9694d8dd79dff6d15a6.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/react-array-method-visualizer/static/css/main.07b460cf.chunk.css",
+  "main.js": "/react-array-method-visualizer/static/js/main.cdd636a5.chunk.js",
+  "main.js.map": "/react-array-method-visualizer/static/js/main.cdd636a5.chunk.js.map",
+  "static/js/1.0e0224ce.chunk.js": "/react-array-method-visualizer/static/js/1.0e0224ce.chunk.js",
+  "static/js/1.0e0224ce.chunk.js.map": "/react-array-method-visualizer/static/js/1.0e0224ce.chunk.js.map",
+  "runtime~main.js": "/react-array-method-visualizer/static/js/runtime~main.09747e35.js",
+  "runtime~main.js.map": "/react-array-method-visualizer/static/js/runtime~main.09747e35.js.map",
+  "static/css/main.07b460cf.chunk.css.map": "/react-array-method-visualizer/static/css/main.07b460cf.chunk.css.map",
+  "index.html": "/react-array-method-visualizer/index.html",
+  "precache-manifest.6a4cc6a01f49acb6eef66b9b5050b8b1.js": "/react-array-method-visualizer/precache-manifest.6a4cc6a01f49acb6eef66b9b5050b8b1.js",
+  "service-worker.js": "/react-array-method-visualizer/service-worker.js"
 }
