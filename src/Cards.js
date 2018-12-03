@@ -17,7 +17,7 @@ class Card extends Component {
       return;
     }
   }
-
+  // move this to App.js
   renderHeading = i => {
     switch (i) {
       case 0:
@@ -26,15 +26,15 @@ class Card extends Component {
         );
       case 1:
         return (
-          'Array.prototype.forEach( )'
+          'Array.prototype.map( )'
         );
       case 2:
         return (
-          'Array.prototype.map( )'
+          'Array.prototype.filter( )'
         );
       case 3:
         return (
-          'Array.prototype.filter( )'
+          'Array.prototype.forEach( )'
         );
       case 4:
         return (
@@ -90,7 +90,7 @@ class Card extends Component {
     }
     if (this.props.keyVal !== 0) {
       primBtn =
-        <div className="ctr--btn">
+        <>
           <button
             type="button"
             className="btn btn--std"
@@ -105,7 +105,7 @@ class Card extends Component {
           >
             Reset
           </button>
-        </div>
+        </>
     }
     return (
       <div className={this.props.className}
@@ -117,7 +117,9 @@ class Card extends Component {
             {this.renderArray()}
           </p>
           {result}
-          {primBtn}
+          <div className="ctr--btn">
+            {primBtn}
+          </div>
         </div>
       </div>
     );

@@ -15,20 +15,24 @@ My goal is to build a React app that visualizes array methods. The app is pretty
 ### Roadmap to v1.0.0
 
 **Currently implemented features**
-
+- Instancing state for each rendered card
+- Instaced array reset via button
+- Array value submission via form
+- Array reset via button
 
 **Version 0.5.0 should have the following done**
 - Cards should get the array from the form and then save that as an instance in each Card's state
+- Cards should be resetable via a button in the form
 - Form should allow you to submit or reset the arrays
-- Cards should be able to *slowly* update the state of the Card's array while its performing operations
+- User may add and remove cards with the corresponding array method
 
 **Version 1.0.0 should have the following done**
 - Cards should visualize each step of the specified array method
   - each card should display a separate array method properly
-- Cards should be resetable via a button in the form
+- Cards should be able to *slowly* update the state of the Card's array while its performing operations
+  - this is quite complex and will probably be worked on throughout
 
 **Post v1.0.0 features**
-- User may add and remove cards with the corresponding array method
 - Allow for the addition of strings into the form
 
 ## Dependencies

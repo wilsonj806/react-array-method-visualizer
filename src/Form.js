@@ -29,27 +29,45 @@ class Form extends Component {
     const { number } = this.state;
     return (
       <>
-        <form id="form" className="form">
-          <h2 className="heading">Initialize Array</h2>
-          <input
-            type="text"
-            name="entry"
-            value={number}
-            onChange={this.handleChange}
-          />
-          <input className="btn btn--std"
-            form="form"
-            type="button"
-            value="Submit"
-            onClick={this.submitForm}
-          />
-          <button className="btn btn--reset"
-            type="button"
-            onClick={this.props.resetArrays}
-          >
-            Reset
-          </button>
-        </form>
+        <div className="ctr--form">
+          <form id="form" className="form">
+            <h2 className="heading">Initialize Array</h2>
+            <input
+              type="text"
+              name="entry"
+              value={number}
+              onChange={this.handleChange}
+            />
+            <input className="btn btn--std"
+              form="form"
+              type="button"
+              value="Submit"
+              onClick={this.submitForm}
+            />
+            <button className="btn btn--reset"
+              type="button"
+              onClick={this.props.resetArrays}
+            >
+              Reset
+            </button>
+          </form>
+
+          <div className="ctr--btn">
+            <button
+            className="btn btn--std"
+            onClick={()=>this.props.handleCardAddFn(1)}
+            >
+              Array.prototype.map( )
+            </button>
+            <button
+            className="btn btn--std"
+            onClick={()=>this.props.handleCardAddFn(2)}
+            >
+              Array.prototype.filter( )
+            </button>
+
+          </div>
+        </div>
       </>
     );
   }
