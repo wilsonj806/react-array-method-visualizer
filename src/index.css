@@ -5,7 +5,7 @@ main{
 }
 
 .btn{
-  margin: 0px 5px;
+  margin: 3px 5px;
   padding: 5px 5px;
   border-radius: 3px;
   border: 0px solid transparent;
@@ -58,6 +58,9 @@ input[type="button"]{
   border-radius: 5px 5px 0px 0px;
   background-color: #e8e8e8;
   text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 
 .card__content{
@@ -68,6 +71,16 @@ input[type="button"]{
   justify-content: space-between;
 }
 
+.card__text{
+  margin: 8px 0;
+}
+
+.ctr--btn{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (min-width: 768px) {
 
@@ -93,6 +106,6 @@ input[type="button"]{
   }
   .card{
     margin: 20px;
-    width: 22%;
+    width: 20%;
   }
 }

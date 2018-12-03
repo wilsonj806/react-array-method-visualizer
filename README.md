@@ -27,6 +27,10 @@ My goal is to build a React app that visualizes array methods. The app is pretty
   - each card should display a separate array method properly
 - Cards should be resetable via a button in the form
 
+**Post v1.0.0 features**
+- User may add and remove cards with the corresponding array method
+- Allow for the addition of strings into the form
+
 ## Dependencies
 
 This app was built using Facebook's create-react-app npm package.

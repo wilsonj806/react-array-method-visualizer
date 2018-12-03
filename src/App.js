@@ -39,7 +39,6 @@ class App extends Component {
         arrayData={state.array}
         resetState={state.resetNow}
         onResetClick={() => this.resetArray()}
-        isClicked={state.isClicked}
       />
     );
   }
