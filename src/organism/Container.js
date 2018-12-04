@@ -9,19 +9,30 @@ class Container extends Component {
     this.state = this.initialState;
   }
 
+  renderFromState = (targetArr) => {
+    const props = this.props;
+    const renderState = props.renderState;
+    if (renderState.map === true) {
+      targetArr.push(props.renderCard(props.numArr[0]));
+    }
+    if (renderState.filter === true) {
+      targetArr.push(props.renderCard(props.numArr[1]));
+    }
+    if (renderState.forEach === true) {
+      targetArr.push(props.renderCard(props.numArr[2]));
+    }
+  }
+
   render() {
-    // figure out how to streamline the below
+    const props = this.props;
     let renderList = [];
-    renderList.push(this.props.renderCardFn(0));
-    if (this.props.renderState.map === true) {
-      renderList.push(this.props.renderCardFn(1));
+    // Default card, always needs to be there
+    if (props.className === "ctr--cards") {
+      renderList.push(props.renderCard(0));
     }
-    if (this.props.renderState.filter === true) {
-      renderList.push(this.props.renderCardFn(2));
-    }
-    if (this.props.renderState.forEach === true) {
-      renderList.push(this.props.renderCardFn(3));
-    }
+
+    this.renderFromState(renderList);
+
     return (
       <div
       className="ctr--cards"

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '../atoms/Buttons';
 class Card extends Component {
   constructor(props){
     super(props);
@@ -9,7 +10,6 @@ class Card extends Component {
     }
     this.state = this.initialState;
   }
-
   componentDidUpdate(prevProps, prevState) {
     // reset if button is clicked
     if (this.state.isclicked !== false) {
@@ -26,19 +26,19 @@ class Card extends Component {
         );
       case 1:
         return (
-          'Array.prototype.map( )'
+          'Array.map( )'
         );
       case 2:
         return (
-          'Array.prototype.filter( )'
+          'Array.filter( )'
         );
       case 3:
         return (
-          'Array.prototype.forEach( )'
+          'Array.forEach( )'
         );
       case 4:
         return (
-          'Array.prototype.some( )'
+          'Array.some( )'
         );
       default:
       break;
@@ -52,9 +52,11 @@ class Card extends Component {
         isclicked: !this.state.isclicked,
         isRendering: !this.state.isRendering,
       });
+      console.dir(this.props.showMapReact);
     }
 
   }
+
   renderArray = () => {
     if ((this.props.arrayData.length < 1) && (this.props.keyVal === 0)){
       return `Please submit values`;
@@ -81,7 +83,8 @@ class Card extends Component {
   }
 
   render() {
-    const keyVal = this.props.keyVal;
+    const props = this.props;
+    const keyVal = props.keyVal;
     let result;
     let primBtn;
 
@@ -91,24 +94,22 @@ class Card extends Component {
     if (keyVal !== 0) {
       primBtn =
         <>
-          <button
-            type="button"
-            className="btn btn--std"
+          <Button
             onClick={() => this.handleBtn()}
           >
             Begin Computation
-          </button>
-          <button
-          type="button"
-          className="btn btn--reset"
-          onClick={() => this.resetInstanceArray()}
+          </Button>
+
+          <Button
+            btnType="btn--reset"
+            onClick={() => this.resetInstanceArray()}
           >
             Reset
-          </button>
+          </Button>
         </>
     }
     return (
-      <div className={this.props.className}
+      <div className={`card ${props.cardType}`}
         key={keyVal}
       >
         <h2 className="card__heading">{this.renderHeading(keyVal)}</h2>

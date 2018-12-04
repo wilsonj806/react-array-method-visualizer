@@ -15,7 +15,7 @@ class Form extends Component {
     if (isNaN(parsedVal) || (value === '') || (value.length > 4)) return;
 
     this.setState({
-      "number": parsedVal
+      number: parsedVal
     });
   }
 

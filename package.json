@@ -1,6 +1,6 @@
 {
   "name": "array-method-visualize",
-  "version": "0.15.0",
+  "version": "0.25.0",
   "private": true,
   "homepage": "https://wilsonj806.github.io/react-array-method-visualizer/",
   "dependencies": {

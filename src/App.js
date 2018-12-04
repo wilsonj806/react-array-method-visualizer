@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import Button from './atoms/Buttons';
+import Card from './molecules/Cards';
 import Form from './organism/Forms';
-import Card from './organism/Cards';
 import Container from './organism/Container';
 import './index.css';
+
+// FIXME: consolidate indexing standard, right now its both 0,1,2,3 and 1,2,3,4
 
 class App extends Component {
   constructor(props){
@@ -18,21 +21,26 @@ class App extends Component {
       },
       array: [],
       resetNow: false,
-      classNameArray: [
-        "card card--init",
-        "card card--map",
-        "card card--filter",
-        "card card--forEach",
-        "card card--some",
-      ],
     };
     this.state = this.initialState;
   }
+  numArr = [1,2,3,4,5,6,7,8];
+
+  // Event handling methods
 
   handleSubmit = (entry) => {
     if (entry === '') return;
     this.setState({array: [...this.state.array, entry]});
   }
+
+  resetArrays = () => {
+    this.setState({
+      array: [],
+      toRender: {...this.initialState.toRender}
+    });
+  }
+
+  // State management
 
   handleCardAdd = (keyVal) => {
     switch(keyVal) {
@@ -65,65 +73,81 @@ class App extends Component {
     }
   }
 
-  resetArrays = () => {
-    this.setState({
-      array: [],
-      toRender: {...this.initialState.toRender}
-    });
+  // Rendering methods
+
+  handleCardId = (numArr) => {
+    switch(numArr) {
+      case 0:
+        return 'card--init';
+      case 1:
+        return 'card--map';
+      case 2:
+        return 'card--filter';
+      case 3:
+        return 'card--forEach';
+      case 4:
+        return 'card--some';
+      case 5:
+        return 'card--find';
+      case 6:
+        return 'card--findIndex';
+      default:
+        break;
+    }
   }
 
   renderCard = (i) => {
+    console.dir(this);
     const state = this.state;
     return (
       <Card
         key={i}
         keyVal={i}
-        className={state.classNameArray[i]}
+        cardType={this.handleCardId(i)}
         arrayData={state.array}
         resetState={state.resetNow}
         onResetClick={() => this.resetArray()}
+        showMapReact={this.props.arrMethods.showMapReact}
       />
     );
   }
 
   render() {
-    // TODO: move the buttons in div.ctr--btn or turn it into a component
+    // TODO: eventually make a method for populating ctr--btn by extending Container.js
     return (
       <main>
         <Form
           handleSubmit={this.handleSubmit}
           resetArrays={this.resetArrays}
-          renderCardFn={this.renderCard}
         >
-        <div className="ctr--btn">
-            <button
-            key={1}
-            className="btn btn--std"
-            onClick={()=>this.handleCardAdd(1)}
-            >
-              Array.prototype.map( )
-            </button>
-            <button
-            key={2}
-            className="btn btn--std"
-            onClick={()=>this.handleCardAdd(2)}
-            >
-              Array.prototype.filter( )
-            </button>
-            <button
-            key={3}
-            className="btn btn--std"
-            onClick={()=>this.handleCardAdd(3)}
-            >
-              Array.prototype.forEach( )
-            </button>
+          <div className="ctr--btn">
+              <Button
+              key={1}
+              onClick={() => this.handleCardAdd(1)}
+              >
+                Array.map( )
+              </Button>
 
-          </div>
+              <Button
+              key={2}
+              onClick={() => this.handleCardAdd(2)}
+              >
+                Array.filter( )
+              </Button>
+              <Button
+                key={3}
+                onClick={() => this.handleCardAdd(3)}
+              >
+                Array.forEach( )
+              </Button>
+
+            </div>
         </Form>
         <Container
-        className="ctr--cards"
-        renderCardFn={this.renderCard}
-        renderState={this.state.toRender}
+          numArr={this.numArr}
+          className="ctr--cards"
+          renderCard={this.renderCard}
+          renderState={this.state.toRender}
         />
       </main>
     );
