@@ -17,7 +17,7 @@ class Card extends Component {
       return;
     }
   }
-  // move this to App.js
+  // TODO: move this to App.js or make it its own function to import
   renderHeading = i => {
     switch (i) {
       case 0:
@@ -86,9 +86,9 @@ class Card extends Component {
     let primBtn;
 
     if ((this.state.isclicked === true) || (this.state.isRendering === true)) {
-      result = this.processArray(this.props.keyVal);
+      result = this.processArray(keyVal);
     }
-    if (this.props.keyVal !== 0) {
+    if (keyVal !== 0) {
       primBtn =
         <>
           <button

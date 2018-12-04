@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form from './Form';
-import Card from './Cards';
-import Container from './Container';
+import Form from './organism/Forms';
+import Card from './organism/Cards';
+import Container from './organism/Container';
 import './index.css';
 
 class App extends Component {
@@ -18,7 +18,6 @@ class App extends Component {
       },
       array: [],
       resetNow: false,
-      isClicked: false,
       classNameArray: [
         "card card--init",
         "card card--map",
@@ -53,13 +52,20 @@ class App extends Component {
           },
         });
         break;
+      case 3:
+        this.setState({
+          toRender: {
+            ...this.state.toRender,
+            forEach: !this.state.toRender.forEach,
+          },
+        });
+        break;
       default:
         break;
     }
   }
 
   resetArrays = () => {
-    console.log(this);
     this.setState({
       array: [],
       toRender: {...this.initialState.toRender}
@@ -70,6 +76,7 @@ class App extends Component {
     const state = this.state;
     return (
       <Card
+        key={i}
         keyVal={i}
         className={state.classNameArray[i]}
         arrayData={state.array}
@@ -80,14 +87,39 @@ class App extends Component {
   }
 
   render() {
+    // TODO: move the buttons in div.ctr--btn or turn it into a component
     return (
       <main>
         <Form
           handleSubmit={this.handleSubmit}
-          handleCardAddFn={this.handleCardAdd}
           resetArrays={this.resetArrays}
           renderCardFn={this.renderCard}
-        />
+        >
+        <div className="ctr--btn">
+            <button
+            key={1}
+            className="btn btn--std"
+            onClick={()=>this.handleCardAdd(1)}
+            >
+              Array.prototype.map( )
+            </button>
+            <button
+            key={2}
+            className="btn btn--std"
+            onClick={()=>this.handleCardAdd(2)}
+            >
+              Array.prototype.filter( )
+            </button>
+            <button
+            key={3}
+            className="btn btn--std"
+            onClick={()=>this.handleCardAdd(3)}
+            >
+              Array.prototype.forEach( )
+            </button>
+
+          </div>
+        </Form>
         <Container
         className="ctr--cards"
         renderCardFn={this.renderCard}

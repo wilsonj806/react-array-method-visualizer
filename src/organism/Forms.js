@@ -51,22 +51,7 @@ class Form extends Component {
               Reset
             </button>
           </form>
-
-          <div className="ctr--btn">
-            <button
-            className="btn btn--std"
-            onClick={()=>this.props.handleCardAddFn(1)}
-            >
-              Array.prototype.map( )
-            </button>
-            <button
-            className="btn btn--std"
-            onClick={()=>this.props.handleCardAddFn(2)}
-            >
-              Array.prototype.filter( )
-            </button>
-
-          </div>
+          {this.props.children}
         </div>
       </>
     );

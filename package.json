@@ -2,6 +2,7 @@
   "name": "array-method-visualize",
   "version": "0.15.0",
   "private": true,
+  "homepage": "https://wilsonj806.github.io/react-array-method-visualizer/",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.6.3",

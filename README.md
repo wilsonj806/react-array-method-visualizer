@@ -4,6 +4,8 @@
 
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/wilsonj806/react-array-method-visualizer.svg)](https://github.com/wilsonj806/react-array-method-visualizer)
 
+[**Live Site**](https://wilsonj806.github.io/react-array-method-visualizer/)
+
 ## Description
 
 This is a small React app built to visualize the various array methods available.

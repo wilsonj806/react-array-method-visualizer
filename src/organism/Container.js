@@ -10,6 +10,7 @@ class Container extends Component {
   }
 
   render() {
+    // figure out how to streamline the below
     let renderList = [];
     renderList.push(this.props.renderCardFn(0));
     if (this.props.renderState.map === true) {
@@ -17,6 +18,9 @@ class Container extends Component {
     }
     if (this.props.renderState.filter === true) {
       renderList.push(this.props.renderCardFn(2));
+    }
+    if (this.props.renderState.forEach === true) {
+      renderList.push(this.props.renderCardFn(3));
     }
     return (
       <div
