@@ -1,9 +1,11 @@
 .btn{
-  margin: 3px 5px;
+  margin: 3px 0px;
   padding: 5px 5px;
+  min-width: 52px;
   border-radius: 3px;
   border: 0px solid transparent;
   color: white;
+  user-select: none;
 }
 
 .btn--std{
@@ -11,12 +13,10 @@
 }
 
 .btn--reset{
-  width: 51.50px;
   background-color: #dc3545;
 }
 
 input[type="button"]{
-  margin: 0px 5px;
   padding: 5px 5px;
   border-radius: 3px;
   border: 0px solid transparent;
@@ -43,6 +43,14 @@ input[type="button"]{
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
+}
+
+.ctr--btn{
+  margin: 0 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .card{
@@ -81,7 +89,7 @@ input[type="button"]{
   margin: 8px 0;
 }
 
-.ctr--btn{
+.card--btns{
   margin: 0 20px;
   display: flex;
   flex-flow: column nowrap;

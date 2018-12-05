@@ -35,7 +35,7 @@ class Container extends Component {
 
     return (
       <div
-      className="ctr--cards"
+        className="ctr--cards"
       >
         {renderList}
       </div>

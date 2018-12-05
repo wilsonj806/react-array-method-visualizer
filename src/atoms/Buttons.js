@@ -14,7 +14,7 @@ class Button extends Component {
         className={`btn ${this.props.btnType} ${defaultType}`}
         onClick={this.props.onClick}
       >
-      {this.props.children}
+        {this.props.children}
       </button>
     )
   }

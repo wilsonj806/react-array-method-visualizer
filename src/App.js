@@ -6,9 +6,10 @@ import Container from './organism/Container';
 import './index.css';
 
 // FIXME: consolidate indexing standard, right now its both 0,1,2,3 and 1,2,3,4
-
+// TODO: determine where to import showArray.js(i.e figure out which component is determining the contents of the cards)
+// TODO: consolidate heading rendering and the like into one place
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.initialState = {
       toRender: {
@@ -97,7 +98,6 @@ class App extends Component {
   }
 
   renderCard = (i) => {
-    console.dir(this);
     const state = this.state;
     return (
       <Card
@@ -105,7 +105,6 @@ class App extends Component {
         keyVal={i}
         cardType={this.handleCardId(i)}
         arrayData={state.array}
-        resetState={state.resetNow}
         onResetClick={() => this.resetArray()}
         showMapReact={this.props.arrMethods.showMapReact}
       />
@@ -114,6 +113,7 @@ class App extends Component {
 
   render() {
     // TODO: eventually make a method for populating ctr--btn by extending Container.js
+    // TODO: reduce the buttons in the div.ctr--btn with Array.prototype.map()
     return (
       <main>
         <Form
@@ -122,15 +122,15 @@ class App extends Component {
         >
           <div className="ctr--btn">
               <Button
-              key={1}
-              onClick={() => this.handleCardAdd(1)}
+                key={1}
+                onClick={() => this.handleCardAdd(1)}
               >
                 Array.map( )
               </Button>
 
               <Button
-              key={2}
-              onClick={() => this.handleCardAdd(2)}
+                key={2}
+                onClick={() => this.handleCardAdd(2)}
               >
                 Array.filter( )
               </Button>
@@ -140,7 +140,6 @@ class App extends Component {
               >
                 Array.forEach( )
               </Button>
-
             </div>
         </Form>
         <Container

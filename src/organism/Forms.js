@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// FIXME: can't fully delete input in the text field
+// FIXME: pressing Enter shouldn't refresh
+
 class Form extends Component {
   constructor(props){
     super(props);

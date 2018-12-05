@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../atoms/Buttons';
+
+// FIXME: rethink when to make the array update the instanced array
 class Card extends Component {
   constructor(props){
     super(props);
@@ -10,11 +12,24 @@ class Card extends Component {
     }
     this.state = this.initialState;
   }
+
+  componentDidMount() {
+    // render array if the property exists and the Card just got rendered
+    if (this.props.arrayData) {
+      this.setState({arrayInstance:[...this.props.arrayData]});
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     // reset if button is clicked
     if (this.state.isclicked !== false) {
       this.setState({isclicked: false});
       return;
+    }
+    if (prevState.arrayInstance !== this.props.arrayData) {
+      this.setState({
+        arrayInstance: this.props.arrayData,
+      });
     }
   }
   // TODO: move this to App.js or make it its own function to import
@@ -46,15 +61,7 @@ class Card extends Component {
   }
 
   handleBtn = () => {
-    if (this.state.arrayInstance.length === 0) {
-      this.setState({
-        arrayInstance: this.props.arrayData,
-        isclicked: !this.state.isclicked,
-        isRendering: !this.state.isRendering,
-      });
-      console.dir(this.props.showMapReact);
-    }
-
+    console.log('hi');
   }
 
   renderArray = () => {
@@ -118,7 +125,7 @@ class Card extends Component {
             {this.renderArray()}
           </p>
           {result}
-          <div className="ctr--btn">
+          <div className="card--btns">
             {primBtn}
           </div>
         </div>
