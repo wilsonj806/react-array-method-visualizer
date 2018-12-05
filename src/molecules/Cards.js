@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import Button from '../atoms/Buttons';
+
+// FIXME: rethink when to make the array update the instanced array
 class Card extends Component {
   constructor(props){
     super(props);
     this.initialState = {
       arrayInstance: [],
       isclicked: false,
-      isRendering: false,
+      isInstanced: false,
     }
     this.state = this.initialState;
+  }
+
+  componentDidMount() {
+    // render array if the property exists and the Card just got rendered
+    if (this.props.arrayData) {
+      this.setState({arrayInstance:[...this.props.arrayData]});
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -16,45 +26,17 @@ class Card extends Component {
       this.setState({isclicked: false});
       return;
     }
-  }
-  // move this to App.js
-  renderHeading = i => {
-    switch (i) {
-      case 0:
-        return (
-          'Initial State'
-        );
-      case 1:
-        return (
-          'Array.prototype.map( )'
-        );
-      case 2:
-        return (
-          'Array.prototype.filter( )'
-        );
-      case 3:
-        return (
-          'Array.prototype.forEach( )'
-        );
-      case 4:
-        return (
-          'Array.prototype.some( )'
-        );
-      default:
-      break;
+    if (prevState.arrayInstance !== this.props.arrayData) {
+      this.setState({
+        arrayInstance: this.props.arrayData,
+      });
     }
   }
 
   handleBtn = () => {
-    if (this.state.arrayInstance.length === 0) {
-      this.setState({
-        arrayInstance: this.props.arrayData,
-        isclicked: !this.state.isclicked,
-        isRendering: !this.state.isRendering,
-      });
-    }
-
+    this.setState({isInstanced: true});
   }
+
   renderArray = () => {
     if ((this.props.arrayData.length < 1) && (this.props.keyVal === 0)){
       return `Please submit values`;
@@ -81,43 +63,41 @@ class Card extends Component {
   }
 
   render() {
-    const keyVal = this.props.keyVal;
+    const props = this.props;
+    const keyVal = props.keyVal;
     let result;
     let primBtn;
 
-    if ((this.state.isclicked === true) || (this.state.isRendering === true)) {
-      result = this.processArray(this.props.keyVal);
-    }
-    if (this.props.keyVal !== 0) {
+
+    result = this.processArray(keyVal);
+    if (keyVal !== 0) {
       primBtn =
         <>
-          <button
-            type="button"
-            className="btn btn--std"
+          <Button
             onClick={() => this.handleBtn()}
           >
             Begin Computation
-          </button>
-          <button
-          type="button"
-          className="btn btn--reset"
-          onClick={() => this.resetInstanceArray()}
+          </Button>
+
+          <Button
+            btnType="btn--reset"
+            onClick={() => this.resetInstanceArray()}
           >
             Reset
-          </button>
+          </Button>
         </>
     }
     return (
-      <div className={this.props.className}
+      <div className={`card ${props.cardType}`}
         key={keyVal}
       >
-        <h2 className="card__heading">{this.renderHeading(keyVal)}</h2>
+        <h2 className="card__heading">{this.props.renderHeading(keyVal)}</h2>
         <div className="card__content">
           <p className="card__text">
             {this.renderArray()}
           </p>
           {result}
-          <div className="ctr--btn">
+          <div className="card--btns">
             {primBtn}
           </div>
         </div>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// FIXME: can't fully delete input in the text field
+// FIXME: pressing Enter shouldn't refresh
+
 class Form extends Component {
   constructor(props){
     super(props);
@@ -15,7 +18,7 @@ class Form extends Component {
     if (isNaN(parsedVal) || (value === '') || (value.length > 4)) return;
 
     this.setState({
-      "number": parsedVal
+      number: parsedVal
     });
   }
 
@@ -51,22 +54,7 @@ class Form extends Component {
               Reset
             </button>
           </form>
-
-          <div className="ctr--btn">
-            <button
-            className="btn btn--std"
-            onClick={()=>this.props.handleCardAddFn(1)}
-            >
-              Array.prototype.map( )
-            </button>
-            <button
-            className="btn btn--std"
-            onClick={()=>this.props.handleCardAddFn(2)}
-            >
-              Array.prototype.filter( )
-            </button>
-
-          </div>
+          {this.props.children}
         </div>
       </>
     );
