@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// TODO: if templating handlers is in a different file like App.render.js, update Container.js
+
 class Container extends Component {
   constructor(props) {
     super(props);
@@ -9,29 +11,32 @@ class Container extends Component {
     this.state = this.initialState;
   }
 
-  renderFromState = (targetArr) => {
+  renderFromState = () => {
     const props = this.props;
-    const renderState = props.renderState;
-    if (renderState.map === true) {
-      targetArr.push(props.renderCard(props.numArr[0]));
+    if (!props.toRender) {
+      throw new Error('this.props.toRender is undefined');
     }
-    if (renderState.filter === true) {
-      targetArr.push(props.renderCard(props.numArr[1]));
-    }
-    if (renderState.forEach === true) {
-      targetArr.push(props.renderCard(props.numArr[2]));
-    }
+    // convert the passed state var to an array of boolean values
+    const boolArr = Object.values(props.toRender);
+    const jsxArr = boolArr.map((val, i) => {
+      if (val === true) {
+        let jsx = (props.renderCard(i + 1));
+        return jsx;
+      }
+      return undefined;
+    });
+    return jsxArr;
   }
 
   render() {
     const props = this.props;
-    let renderList = [];
+    const renderList = [];
     // Default card, always needs to be there
     if (props.className === "ctr--cards") {
       renderList.push(props.renderCard(0));
     }
-
-    this.renderFromState(renderList);
+    const newList = this.renderFromState();
+    renderList.push(newList);
 
     return (
       <div

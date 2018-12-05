@@ -7,7 +7,7 @@ import './index.css';
 
 // FIXME: consolidate indexing standard, right now its both 0,1,2,3 and 1,2,3,4
 // TODO: determine where to import showArray.js(i.e figure out which component is determining the contents of the cards)
-// TODO: consolidate heading rendering and the like into one place
+// TODO: move templating handlers to a different file like App.render.js
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,8 @@ class App extends Component {
         forEach: false,
         some: false,
         sort: false,
-        find: false,
+        findIndex: false,
+        reduce: false,
       },
       array: [],
       resetNow: false,
@@ -69,6 +70,14 @@ class App extends Component {
           },
         });
         break;
+      case 4:
+        this.setState({
+          toRender: {
+            ...this.state.toRender,
+            some: !this.state.toRender.some,
+          },
+        });
+        break;
       default:
         break;
     }
@@ -97,6 +106,33 @@ class App extends Component {
     }
   }
 
+  renderHeading = i => {
+    switch (i) {
+      case 0:
+        return (
+          'Initial State'
+        );
+      case 1:
+        return (
+          'Array.map( )'
+        );
+      case 2:
+        return (
+          'Array.filter( )'
+        );
+      case 3:
+        return (
+          'Array.forEach( )'
+        );
+      case 4:
+        return (
+          'Array.some( )'
+        );
+      default:
+      break;
+    }
+  }
+
   renderCard = (i) => {
     const state = this.state;
     return (
@@ -106,14 +142,25 @@ class App extends Component {
         cardType={this.handleCardId(i)}
         arrayData={state.array}
         onResetClick={() => this.resetArray()}
+        renderHeading={this.renderHeading}
         showMapReact={this.props.arrMethods.showMapReact}
       />
     );
   }
 
   render() {
+    let btnList;
+    btnList = this.numArr.map((val) => {
+      return (
+        <Button
+          key={val}
+          onClick={() => this.handleCardAdd(val)}
+        >
+          {this.renderHeading(val)}
+        </Button>
+      )
+    })
     // TODO: eventually make a method for populating ctr--btn by extending Container.js
-    // TODO: reduce the buttons in the div.ctr--btn with Array.prototype.map()
     return (
       <main>
         <Form
@@ -121,30 +168,13 @@ class App extends Component {
           resetArrays={this.resetArrays}
         >
           <div className="ctr--btn">
-              <Button
-                key={1}
-                onClick={() => this.handleCardAdd(1)}
-              >
-                Array.map( )
-              </Button>
-
-              <Button
-                key={2}
-                onClick={() => this.handleCardAdd(2)}
-              >
-                Array.filter( )
-              </Button>
-              <Button
-                key={3}
-                onClick={() => this.handleCardAdd(3)}
-              >
-                Array.forEach( )
-              </Button>
-            </div>
+            {btnList}
+          </div>
         </Form>
         <Container
           numArr={this.numArr}
           className="ctr--cards"
+          toRender={this.state.toRender}
           renderCard={this.renderCard}
           renderState={this.state.toRender}
         />

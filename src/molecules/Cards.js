@@ -8,7 +8,7 @@ class Card extends Component {
     this.initialState = {
       arrayInstance: [],
       isclicked: false,
-      isRendering: false,
+      isInstanced: false,
     }
     this.state = this.initialState;
   }
@@ -32,36 +32,9 @@ class Card extends Component {
       });
     }
   }
-  // TODO: move this to App.js or make it its own function to import
-  renderHeading = i => {
-    switch (i) {
-      case 0:
-        return (
-          'Initial State'
-        );
-      case 1:
-        return (
-          'Array.map( )'
-        );
-      case 2:
-        return (
-          'Array.filter( )'
-        );
-      case 3:
-        return (
-          'Array.forEach( )'
-        );
-      case 4:
-        return (
-          'Array.some( )'
-        );
-      default:
-      break;
-    }
-  }
 
   handleBtn = () => {
-    console.log('hi');
+    this.setState({isInstanced: true});
   }
 
   renderArray = () => {
@@ -95,9 +68,8 @@ class Card extends Component {
     let result;
     let primBtn;
 
-    if ((this.state.isclicked === true) || (this.state.isRendering === true)) {
-      result = this.processArray(keyVal);
-    }
+
+    result = this.processArray(keyVal);
     if (keyVal !== 0) {
       primBtn =
         <>
@@ -119,7 +91,7 @@ class Card extends Component {
       <div className={`card ${props.cardType}`}
         key={keyVal}
       >
-        <h2 className="card__heading">{this.renderHeading(keyVal)}</h2>
+        <h2 className="card__heading">{this.props.renderHeading(keyVal)}</h2>
         <div className="card__content">
           <p className="card__text">
             {this.renderArray()}
